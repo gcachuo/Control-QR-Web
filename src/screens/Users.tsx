@@ -1,14 +1,14 @@
 import React from "react";
 import DrawerComponent from "../components/Drawer";
 
-function HomeScreen() {
+function UsersScreen() {
   return (
     <div>
       <DrawerComponent />
-      <h1>Home</h1>
-      <p>Bienvenido a la página de inicio.</p>
+      <h1>Users</h1>
+      <p>Bienvenido a la página de usuarios.</p>
     </div>
   );
 }
 
-export default HomeScreen;
+export default UsersScreen;
