@@ -14,12 +14,12 @@ const firebaseConfig = {
   appId: "1:911129246688:web:435b3f17a29660dc650985",
   measurementId: "G-WC849PQ6XB",
 };
-let app, auth;
+let app;
 
 if (!getApps().length) {
   try {
     app = initializeApp(firebaseConfig);
-    auth = initializeAuth(app, {
+    initializeAuth(app, {
       persistence: [browserLocalPersistence],
     });
   } catch (error) {
@@ -27,5 +27,5 @@ if (!getApps().length) {
   }
 } else {
   app = getApp();
-  auth = getAuth(app);
+  getAuth(app);
 }

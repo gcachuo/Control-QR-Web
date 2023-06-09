@@ -20,7 +20,6 @@ import { AuthProvider, useAuth } from "./hooks/useAuth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
-  const { user } = useAuth();
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -46,10 +45,10 @@ function App() {
     useEffect(() => {
       if (!isLoggedIn) {
         navigation("/login");
-      } else if (location.pathname == "/login") {
+      } else if (location.pathname === "/login") {
         navigation("/home");
       }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, location.pathname, navigation]);
 
     return (
       <Routes>
@@ -74,7 +73,7 @@ function App() {
       <Box
         sx={{
           marginLeft: { md: isLoggedIn ? "200px" : 0 },
-          paddingLeft: "30px",
+          paddingLeft: isLoggedIn ? "30px" : 0,
           backgroundColor: "#f0f0f0",
           height: "100vh",
         }}

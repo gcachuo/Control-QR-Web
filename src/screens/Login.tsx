@@ -6,7 +6,6 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import toastr from "toastr";
 import {
   Box as View,
   Button,
@@ -45,9 +44,8 @@ export default function LoginScreen() {
 
     sendPasswordResetEmail(getAuth(), email)
       .then(() => {
-        toastr.info(
-          "Revisa tu correo electrónico para restablecer tu contraseña.",
-          "Correo electrónico enviado"
+        setError(
+          "Correo enviado. Revisa tu correo electrónico para restablecer tu contraseña."
         );
       })
       .catch((error) => handleErrors(error));
@@ -89,17 +87,28 @@ export default function LoginScreen() {
   };
 
   return (
-    <View sx={{ marginHorizontal: 60 }}>
+    <View
+      component="form"
+      sx={{
+        paddingTop: "60px",
+        marginLeft: { xs: "60px", sm: "10em", md: "15em", lg: "20em" },
+        marginRight: { xs: "60px", sm: "10em", md: "15em", lg: "20em" },
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {isLoggedIn ? (
         <View style={{ alignItems: "center" }}></View>
       ) : (
         <>
+          <h1>Demo</h1>
           <TextInput
             placeholder="Email"
             value={email}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(event.target.value)
             }
+            variant="outlined"
             style={styles.TextInput}
             autoCapitalize="none"
           />
@@ -109,6 +118,7 @@ export default function LoginScreen() {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(event.target.value)
             }
+            type="password"
             style={styles.TextInput}
           />
           {error && <Text style={{ color: "red" }}>{error}</Text>}
