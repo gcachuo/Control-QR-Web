@@ -14,7 +14,7 @@ import { Menu } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-function DrawerComponent() {
+function DrawerComponent(props: { title: string }) {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const toggleDrawer = () => {
@@ -26,13 +26,31 @@ function DrawerComponent() {
 
   const DrawerList = (
     <Box>
-      <h4 style={{ paddingLeft: 16 }}>Demo</h4>
+      <Box
+        sx={{
+          backgroundColor: "white",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          height: "60px",
+        }}
+      >
+        <h4 style={{ paddingLeft: 16, margin: 0 }}>Demo</h4>
+      </Box>
       <Divider />
-      <List sx={{ width: { xs: "55vw", sm: "200px" } }}>
-        <ListItem component={RouterLink} to={"/"}>
+      <List
+        sx={{
+          width: { xs: "55vw", sm: "200px" },
+        }}
+      >
+        <ListItem component={RouterLink} to={"/"} style={{ color: "white" }}>
           <ListItemText primary="Inicio" />
         </ListItem>
-        <ListItem component={RouterLink} to={"/users"}>
+        <ListItem
+          component={RouterLink}
+          to={"/users"}
+          style={{ color: "white" }}
+        >
           <ListItemText primary="Usuarios" />
         </ListItem>
       </List>
@@ -40,7 +58,7 @@ function DrawerComponent() {
   );
 
   const Header = () => (
-    <Box>
+    <Box sx={{ backgroundColor: "white" }}>
       <Grid container>
         <Grid
           item
@@ -56,7 +74,7 @@ function DrawerComponent() {
           </Box>
         </Grid>
         <Grid sm item>
-          <h4 style={{ paddingLeft: 16 }}>Demo</h4>
+          <h4 style={{ paddingLeft: 16 }}>{props.title}</h4>
         </Grid>
       </Grid>
       <Divider />
@@ -76,6 +94,11 @@ function DrawerComponent() {
               sx={{
                 display: { md: "none", sm: "block" },
               }}
+              PaperProps={{
+                sx: {
+                  backgroundColor: "#2e3e4e",
+                },
+              }}
             >
               {DrawerList}
             </Drawer>
@@ -84,7 +107,12 @@ function DrawerComponent() {
               variant={"permanent"}
               anchor={"left"}
               sx={{
-                display: { md: "block", sm: "none" },
+                display: { md: "block", sm: "none", xs: "none" },
+              }}
+              PaperProps={{
+                sx: {
+                  backgroundColor: "#2e3e4e",
+                },
               }}
             >
               {DrawerList}

@@ -4,8 +4,7 @@ import Drawer from "../components/Drawer";
 function UsersScreen() {
   return (
     <div>
-      <Drawer />
-      <h1>Users</h1>
+      <Drawer title={"Usuarios"} />
       <p>Bienvenido a la página de usuarios.</p>
     </div>
   );

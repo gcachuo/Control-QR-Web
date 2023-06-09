@@ -11,6 +11,8 @@ function App() {
       sx={{
         marginLeft: { md: "200px" },
         paddingLeft: "30px",
+        backgroundColor: "#f0f0f0",
+        height: "100vh",
       }}
     >
       <BrowserRouter>

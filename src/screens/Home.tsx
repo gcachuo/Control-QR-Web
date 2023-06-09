@@ -4,8 +4,7 @@ import Drawer from "../components/Drawer";
 function HomeScreen() {
   return (
     <div>
-      <Drawer />
-      <h1>Home</h1>
+      <Drawer title={"Inicio"} />
       <p>Bienvenido a la página de inicio.</p>
     </div>
   );
