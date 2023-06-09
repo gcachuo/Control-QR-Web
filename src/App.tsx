@@ -60,6 +60,7 @@ function App() {
         )}
         {isLoggedIn && (
           <>
+            <Route path="/" element={<Home />} />
             <Route path="home" element={<Home />} />
             <Route path="users" element={<Users />} />
           </>
