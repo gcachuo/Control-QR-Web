@@ -1,10 +1,10 @@
 import React from "react";
-import DrawerComponent from "../components/Drawer";
+import Drawer from "../components/Drawer";
 
 function HomeScreen() {
   return (
     <div>
-      <DrawerComponent />
+      <Drawer />
       <h1>Home</h1>
       <p>Bienvenido a la página de inicio.</p>
     </div>

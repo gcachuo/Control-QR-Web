@@ -1,10 +1,10 @@
 import React from "react";
-import DrawerComponent from "../components/Drawer";
+import Drawer from "../components/Drawer";
 
 function UsersScreen() {
   return (
     <div>
-      <DrawerComponent />
+      <Drawer />
       <h1>Users</h1>
       <p>Bienvenido a la página de usuarios.</p>
     </div>
