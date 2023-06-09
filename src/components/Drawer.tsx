@@ -10,12 +10,15 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { Dashboard, Menu, Person } from "@mui/icons-material";
+import { Dashboard, Logout, Menu, Person } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 function DrawerComponent(props: { title: string }) {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const { logout, user } = useAuth();
+  const isLoggedIn = !!user;
 
   const modules = [
     { url: "/", title: "Inicio", icon: <Dashboard /> },
@@ -54,6 +57,7 @@ function DrawerComponent(props: { title: string }) {
       >
         {modules.map((item) => (
           <ListItem
+            key={item.url}
             component={RouterLink}
             to={item.url}
             style={{ color: "white" }}
@@ -62,6 +66,10 @@ function DrawerComponent(props: { title: string }) {
             <ListItemText primary={item.title} />
           </ListItem>
         ))}
+        <ListItem style={{ color: "white" }} onClick={logout}>
+          <Logout />
+          <ListItemText primary={"Cerrar Sesión"} />
+        </ListItem>
       </List>
     </Box>
   );
@@ -90,7 +98,7 @@ function DrawerComponent(props: { title: string }) {
     </Box>
   );
 
-  return (
+  return isLoggedIn ? (
     <div style={{ marginLeft: -30 }}>
       <ClickAwayListener onClickAway={closeDrawer}>
         <Box>
@@ -131,6 +139,8 @@ function DrawerComponent(props: { title: string }) {
         </Box>
       </ClickAwayListener>
     </div>
+  ) : (
+    <></>
   );
 }
 
