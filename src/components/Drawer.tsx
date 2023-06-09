@@ -10,12 +10,21 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { Menu } from "@mui/icons-material";
+import { Dashboard, Menu, Person } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 function DrawerComponent(props: { title: string }) {
   const [openDrawer, setOpenDrawer] = useState(false);
+
+  const modules = [
+    { url: "/", title: "Inicio", icon: <Dashboard /> },
+    {
+      url: "/users",
+      title: "Usuarios",
+      icon: <Person />,
+    },
+  ];
 
   const toggleDrawer = () => {
     setOpenDrawer(!openDrawer);
@@ -43,16 +52,16 @@ function DrawerComponent(props: { title: string }) {
           width: { xs: "55vw", sm: "200px" },
         }}
       >
-        <ListItem component={RouterLink} to={"/"} style={{ color: "white" }}>
-          <ListItemText primary="Inicio" />
-        </ListItem>
-        <ListItem
-          component={RouterLink}
-          to={"/users"}
-          style={{ color: "white" }}
-        >
-          <ListItemText primary="Usuarios" />
-        </ListItem>
+        {modules.map((item) => (
+          <ListItem
+            component={RouterLink}
+            to={item.url}
+            style={{ color: "white" }}
+          >
+            {item.icon}
+            <ListItemText primary={item.title} />
+          </ListItem>
+        ))}
       </List>
     </Box>
   );
