@@ -73,7 +73,7 @@ function App() {
     <AuthProvider>
       <Box
         sx={{
-          marginLeft: { md: isLoggedIn ? "200px" : 0 },
+          marginLeft: { md: isLoggedIn ? "225px" : 0 },
           paddingLeft: isLoggedIn ? "30px" : 0,
           backgroundColor: "#f0f0f0",
           height: "100vh",

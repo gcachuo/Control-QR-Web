@@ -8,6 +8,8 @@ import {
   IconButton,
   List,
   ListItem,
+  ListItemButton,
+  ListItemIcon,
   ListItemText,
 } from "@mui/material";
 import { Dashboard, Logout, Menu, Person } from "@mui/icons-material";
@@ -21,11 +23,11 @@ function DrawerComponent(props: { title: string }) {
   const isLoggedIn = !!user;
 
   const modules = [
-    { url: "/", title: "Inicio", icon: <Dashboard /> },
+    { url: "/", title: "Inicio", icon: <Dashboard color={"primary"} /> },
     {
       url: "/users",
       title: "Usuarios",
-      icon: <Person />,
+      icon: <Person color={"primary"} />,
     },
   ];
 
@@ -52,7 +54,7 @@ function DrawerComponent(props: { title: string }) {
       <Divider />
       <List
         sx={{
-          width: { xs: "55vw", sm: "200px" },
+          width: { xs: "55vw", sm: "225px" },
         }}
       >
         {modules.map((item) => (
@@ -62,13 +64,19 @@ function DrawerComponent(props: { title: string }) {
             to={item.url}
             style={{ color: "white" }}
           >
-            {item.icon}
-            <ListItemText primary={item.title} />
+            <ListItemButton>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.title} />
+            </ListItemButton>
           </ListItem>
         ))}
         <ListItem style={{ color: "white" }} onClick={logout}>
-          <Logout />
-          <ListItemText primary={"Cerrar Sesión"} />
+          <ListItemButton>
+            <ListItemIcon>
+              <Logout color={"primary"} />
+            </ListItemIcon>
+            <ListItemText primary={"Cerrar Sesión"} />
+          </ListItemButton>
         </ListItem>
       </List>
     </Box>
