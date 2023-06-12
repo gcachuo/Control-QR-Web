@@ -9,6 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 import Drawer from "../components/Drawer";
 import { getUsers } from "../services/firebase/getUsers";
+import FloatingButton from "../components/FloatingButton";
 
 function UsersScreen() {
   const [users, setUsers] = useState([]);
@@ -58,6 +59,7 @@ function UsersScreen() {
             )
           )}
       </List>
+      <FloatingButton />
     </div>
   );
 }

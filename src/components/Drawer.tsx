@@ -107,7 +107,7 @@ function DrawerComponent(props: { title: string }) {
   );
 
   return isLoggedIn ? (
-    <div style={{ marginLeft: -30 }}>
+    <div>
       <ClickAwayListener onClickAway={closeDrawer}>
         <Box>
           <Header />

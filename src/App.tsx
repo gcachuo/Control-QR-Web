@@ -74,14 +74,19 @@ function App() {
       <Box
         sx={{
           marginLeft: { md: isLoggedIn ? "225px" : 0 },
-          paddingLeft: isLoggedIn ? "30px" : 0,
           backgroundColor: "#f0f0f0",
           height: "100vh",
         }}
       >
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
+        <Box
+          style={{
+            backgroundColor: "white",
+          }}
+        >
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+        </Box>
       </Box>
     </AuthProvider>
   );
