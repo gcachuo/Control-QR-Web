@@ -10,9 +10,11 @@ import React, { useEffect, useState } from "react";
 import Drawer from "../components/Drawer";
 import { getUsers } from "../services/firebase/getUsers";
 import FloatingButton from "../components/FloatingButton";
+import AddUserModal from "../components/AddUserModal";
 
 function UsersScreen() {
   const [users, setUsers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     getUsers()
@@ -31,6 +33,14 @@ function UsersScreen() {
         console.log("Error fetching user list:", error);
       });
   }, []);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div>
@@ -59,7 +69,8 @@ function UsersScreen() {
             )
           )}
       </List>
-      <FloatingButton />
+      <AddUserModal open={showModal} handleClose={handleCloseModal} />
+      <FloatingButton onClick={handleOpenModal} />
     </div>
   );
 }
