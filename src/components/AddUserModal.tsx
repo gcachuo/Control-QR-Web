@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-import { Box, Button, Divider, Modal, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  InputLabel,
+  Modal,
+  TextField,
+} from "@mui/material";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { doc, DocumentData, getFirestore, setDoc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
 
 const AddUserModal = ({
@@ -12,21 +20,48 @@ const AddUserModal = ({
 }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorText, setErrorText] = useState("");
 
   const handleCreateUser = async () => {
     try {
-      const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, email, password);
+      setErrorText("");
 
-      // Aquí puedes guardar el resto de los campos en Firebase Firestore u otra base de datos
+      if (!name || !address || !phoneNumber) {
+        setErrorText("Error al crear el usuario: " + "Llene todos los datos.");
+        return;
+      }
+
+      const auth = getAuth();
+      const db = getFirestore();
+
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const collectionRef = doc(db, "users", userCredential.user.uid);
+
+      await setDoc(collectionRef, {
+        address,
+        name,
+        phoneNumber,
+      } as DocumentData);
 
       handleClose();
     } catch (error) {
       if (error instanceof FirebaseError) {
+        const errorText =
+          {
+            "auth/invalid-email": "Correo Invalido.",
+            "auth/missing-password": "Contraseña Invalida.",
+            "auth/email-already-in-use": "El correo ya esta en uso.",
+          }[error.code] ?? "Error desconocido.";
         console.error("Error al crear el usuario:", error.toString());
+        setErrorText("Error al crear el usuario: " + errorText);
       } else {
         console.error(error);
       }
@@ -59,7 +94,7 @@ const AddUserModal = ({
           />
           <TextField
             label="Teléfono"
-            value={phone}
+            value={phoneNumber}
             onChange={(e) => setPhone(e.target.value)}
           />
           <Divider style={{ margin: 20 }} />
@@ -87,6 +122,9 @@ const AddUserModal = ({
               Crear Usuario
             </Button>
           </Box>
+          <InputLabel style={{ color: "red" }} color={"error"}>
+            {errorText}
+          </InputLabel>
         </Box>
       </Modal>
     </>

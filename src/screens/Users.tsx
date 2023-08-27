@@ -32,7 +32,7 @@ function UsersScreen() {
       .catch((error: any) => {
         console.log("Error fetching user list:", error);
       });
-  }, []);
+  }, [showModal]);
 
   const handleOpenModal = () => {
     setShowModal(true);
