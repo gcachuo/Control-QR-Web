@@ -25,6 +25,7 @@ function UsersScreen() {
           photoUrl: user.photoURL,
           address: user.address,
           phoneNumber: user.phoneNumber,
+          type: user.type,
         }));
         // @ts-ignore
         setUsers(userList);
@@ -54,6 +55,7 @@ function UsersScreen() {
               uid: string;
               address: string;
               phoneNumber: string;
+              type: string;
             }) => (
               <ListItem key={item.uid}>
                 <ListItemButton>
@@ -62,7 +64,11 @@ function UsersScreen() {
                   </ListItemAvatar>
                   <ListItemText
                     primary={item.displayName}
-                    secondary={`${item.address} - ${item.phoneNumber}`}
+                    secondary={
+                      item.type == "guard"
+                        ? "Guardia"
+                        : `${item.address} - ${item.phoneNumber}`
+                    }
                   />
                 </ListItemButton>
               </ListItem>
