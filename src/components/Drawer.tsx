@@ -12,7 +12,13 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { Dashboard, Logout, Menu, Person } from "@mui/icons-material";
+import {
+  AdminPanelSettings,
+  Dashboard,
+  Logout,
+  Menu,
+  Person,
+} from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
@@ -24,6 +30,11 @@ function DrawerComponent(props: { title: string }) {
 
   const modules = [
     { url: "/", title: "Inicio", icon: <Dashboard color={"primary"} /> },
+    {
+      url: "/access-log",
+      title: "Autorizaciones",
+      icon: <AdminPanelSettings color={"primary"} />,
+    },
     {
       url: "/users",
       title: "Usuarios",

@@ -15,6 +15,7 @@ import { Box } from "@mui/material";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
 import Users from "./screens/Users";
+import AccessLog from "./screens/AccessLog";
 
 import { AuthProvider, useAuth } from "./hooks/useAuth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -62,6 +63,7 @@ function App() {
           <>
             <Route path="/" element={<Home />} />
             <Route path="home" element={<Home />} />
+            <Route path="access-log" element={<AccessLog />} />
             <Route path="users" element={<Users />} />
           </>
         )}
