@@ -8,6 +8,8 @@ interface Visit {
     type: string;
     guestName: string;
     creatorUid: string;
+    creatorName: string;
+    creatorAddress: string;
     createdTime: number;
 }
 
@@ -21,6 +23,8 @@ function AccessLogScreen() {
           type: visit.type,
         guestName: visit.guestName,
         creatorUid: visit.creatorUid,
+        creatorName: visit.creatorName,
+        creatorAddress: visit.creatorAddress,
         createdTime: visit.createdTime,
       }));
       // @ts-ignore
@@ -31,7 +35,6 @@ function AccessLogScreen() {
         });
   },[]);
 
-    console.log(visits);
   return (
     <div>
       <Drawer title={"Autorizaciones"} />
@@ -44,7 +47,7 @@ function AccessLogScreen() {
                         <ListItemText
                             primary={item.guestName}
                             secondary={
-                              `${new Date(item.createdTime)} - ${item.creatorUid}`
+                              `${(new Date(item.createdTime)).toISOString().split('T')[0]} - ${item.creatorName} - ${item.creatorAddress}`
                             }
                         />
                       </ListItemButton>
